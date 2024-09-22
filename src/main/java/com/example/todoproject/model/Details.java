@@ -29,4 +29,11 @@ public class Details {
         this.severity = severity;
         this.todoItem = todoItem;
     }
+
+    public Details(LocalDate deadline, String priority, String severity, TodoItem todoItem) {
+        this.deadline = deadline;
+        this.priority = priority;
+        this.severity = severity;
+        this.todoItem = todoItem;
+    }
 }

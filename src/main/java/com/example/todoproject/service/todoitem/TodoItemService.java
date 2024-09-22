@@ -6,6 +6,8 @@ import com.example.todoproject.model.TodoItem;
 import com.example.todoproject.repository.DetailsRepository;
 import com.example.todoproject.repository.TodoItemRepository;
 import com.example.todoproject.request.AddTodoItemRequest;
+import com.example.todoproject.request.UpdateTodoItemRequest;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -45,7 +47,7 @@ public class TodoItemService implements ITodoItemService{
 
     @Override
     public List<TodoItem> getAllTodoItems() {
-        return null;
+        return todoItemRepository.findAll();
     }
 
     @Override
@@ -59,8 +61,22 @@ public class TodoItemService implements ITodoItemService{
     }
 
     @Override
-    public void updateTodoItem(TodoItem todoItem, Long todoItemId) {
+    public TodoItem updateTodoItem(UpdateTodoItemRequest request, Long todoItemId) {
 
+        TodoItem item = todoItemRepository.findById(todoItemId)
+                .orElseThrow(() -> new EntityNotFoundException("Todo item not found"));
+
+        if (request.getTitle() != null) {
+            item.setTitle(request.getTitle());
+        }
+        if (request.getDescription() != null) {
+            item.setDescription(request.getDescription());
+        }
+        if (request.getDetails() != null) {
+            item.setDetails(request.getDetails());
+        }
+
+        return todoItemRepository.save(item);
     }
 
     @Override
@@ -72,6 +88,8 @@ public class TodoItemService implements ITodoItemService{
 
         if (todoItem.getDetails() != null) {
             todoItemDto.setDeadline(todoItem.getDetails().getDeadline());
+            todoItemDto.setSeverity(todoItem.getDetails().getSeverity());
+            todoItemDto.setPriority(todoItem.getDetails().getPriority());
         }
 
 

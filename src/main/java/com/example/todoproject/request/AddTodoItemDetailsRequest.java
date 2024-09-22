@@ -1,15 +1,13 @@
-package com.example.todoproject.dto;
+package com.example.todoproject.request;
 
 import lombok.Data;
 
 import java.time.LocalDate;
 
 @Data
-public class TodoItemDto {
-    private long id;
-    private String title;
-    private String description;
+public class AddTodoItemDetailsRequest {
     private LocalDate deadline;
     private String priority;
     private String severity;
+
 }
