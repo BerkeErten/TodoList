@@ -75,9 +75,9 @@ public class TodoItemController {
     @PostMapping("update/{todoitemId}")
     public ResponseEntity<ApiResponse> updateTodoItemById(@PathVariable Long todoitemId, @RequestBody UpdateTodoItemRequest request){
         try{
-            TodoItem todoItem = todoItemService.updateTodoItem(request,todoitemId);
-            TodoItemDto todoItemDto = todoItemService.convertToDto(todoItem);
 
+            todoItemService.updateTodoItem(request,todoitemId);
+            TodoItemDto todoItemDto = todoItemService.convertToDto(todoItemService.getTodoItemById(todoitemId));
             ApiResponse response = new ApiResponse("Updated todo item",todoItemDto);
             return new ResponseEntity<>(response,HttpStatus.OK);
         }

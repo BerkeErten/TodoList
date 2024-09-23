@@ -13,7 +13,7 @@ public interface ITodoItemService {
     List<TodoItem> getAllTodoItems();
     TodoItem getTodoItemById(Long id);
     void deleteTodoItemById(Long id);
-    TodoItem updateTodoItem(UpdateTodoItemRequest request, Long todoItemId);
+    void updateTodoItem(UpdateTodoItemRequest request, Long todoItemId);
 
     TodoItemDto convertToDto(TodoItem todoItem1);
 }

@@ -1,5 +1,6 @@
 package com.example.todoproject.model;
 
+import com.example.todoproject.dto.TodoItemDto;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

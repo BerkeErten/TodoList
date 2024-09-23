@@ -61,10 +61,13 @@ public class TodoItemService implements ITodoItemService{
     }
 
     @Override
-    public TodoItem updateTodoItem(UpdateTodoItemRequest request, Long todoItemId) {
+    public void updateTodoItem(UpdateTodoItemRequest request, Long todoItemId) {
 
         TodoItem item = todoItemRepository.findById(todoItemId)
                 .orElseThrow(() -> new EntityNotFoundException("Todo item not found"));
+        Details details = detailsRepository.findByTodoItem_Id(todoItemId);
+
+
 
         if (request.getTitle() != null) {
             item.setTitle(request.getTitle());
@@ -73,10 +76,14 @@ public class TodoItemService implements ITodoItemService{
             item.setDescription(request.getDescription());
         }
         if (request.getDetails() != null) {
-            item.setDetails(request.getDetails());
+            details.setDeadline(request.getDetails().getDeadline() != null ? request.getDetails().getDeadline() : details.getDeadline());
+            details.setPriority(request.getDetails().getPriority() != null ? request.getDetails().getPriority() : details.getPriority());
+            details.setSeverity(request.getDetails().getSeverity() != null ? request.getDetails().getSeverity() : details.getSeverity());
         }
 
-        return todoItemRepository.save(item);
+
+        todoItemRepository.save(item);
+        detailsRepository.save(details);
     }
 
     @Override
