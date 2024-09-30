@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -18,16 +20,27 @@ public class TodoItem {
     @OneToOne(mappedBy = "todoItem", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Details details;
 
-    public TodoItem(Long id, String title, String description, Details details) {
-        this.id = id;
-        this.title = title;
-        this.description = description;
-        this.details = details;
-    }
+    @ManyToMany(mappedBy = "assignedTodos")
+    private List<User> assignedUsers;
 
     public TodoItem(String title, String description, Details details) {
         this.title = title;
         this.description = description;
         this.details = details;
+    }
+
+    public TodoItem(Long id, String title, String description, Details details, List<User> assignedUsers) {
+        this.id = id;
+        this.title = title;
+        this.description = description;
+        this.details = details;
+        this.assignedUsers = assignedUsers;
+    }
+
+    public TodoItem(String title, String description, Details details, List<User> assignedUsers) {
+        this.title = title;
+        this.description = description;
+        this.details = details;
+        this.assignedUsers = assignedUsers;
     }
 }

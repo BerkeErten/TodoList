@@ -4,7 +4,6 @@ import com.example.todoproject.dto.TodoItemDto;
 import com.example.todoproject.model.TodoItem;
 import com.example.todoproject.request.AddTodoItemRequest;
 import com.example.todoproject.request.UpdateTodoItemRequest;
-import org.hibernate.sql.Update;
 
 import java.util.List;
 
