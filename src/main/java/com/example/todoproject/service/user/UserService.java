@@ -1,5 +1,6 @@
 package com.example.todoproject.service.user;
 
+import com.example.todoproject.dto.UserDto;
 import com.example.todoproject.model.TodoItem;
 import com.example.todoproject.model.User;
 import com.example.todoproject.repository.TodoItemRepository;
@@ -35,14 +36,10 @@ public class UserService implements IUserService{
 
 
     @Override
-    public List<User> getAllUsers() {
-        return null;
-    }
+    public List<User> getAllUsers() { return userRepository.findAll();}
 
     @Override
-    public User getUserByUserId(Long id) {
-        return null;
-    }
+    public User getUserByUserId(Long id) { return userRepository.getReferenceById(id);}
 
     @Override
     public void deleteUserById(Long id) {
@@ -54,8 +51,20 @@ public class UserService implements IUserService{
         TodoItem todoItem = todoItemRepository.getReferenceById(todoitem_id);
         User user = userRepository.getReferenceById(user_id);
 
-        user.setAssignedTodos();
-        userRepository.save()
+        user.assignTodoItem(todoItem);
+        todoItem.assignUser(user);
+
+        userRepository.save(user);
+        todoItemRepository.save(todoItem);
+    }
+
+    @Override
+    public UserDto converToDto(User user) {
+        UserDto userDto = new UserDto();
+        userDto.setName(user.getName());
+        userDto.setSurname(user.getSurname());
+
+        return userDto;
     }
 
 

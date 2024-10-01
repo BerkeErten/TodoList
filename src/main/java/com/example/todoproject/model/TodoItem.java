@@ -43,4 +43,9 @@ public class TodoItem {
         this.details = details;
         this.assignedUsers = assignedUsers;
     }
+    public void assignUser(User user){
+        if(!assignedUsers.contains(user)){
+            assignedUsers.add(user);
+        }
+    }
 }

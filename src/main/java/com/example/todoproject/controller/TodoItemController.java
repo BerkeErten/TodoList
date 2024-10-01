@@ -46,10 +46,8 @@ public class TodoItemController {
 
             return new ResponseEntity<>(response, HttpStatus.OK);
         } catch (Exception e) {
-            // In case of any exceptions, create an error response
             ApiResponse errorResponse = new ApiResponse( "Failed to add todo item: " + e.getMessage(),null);
 
-            // Return the response entity with HTTP 500 status
             return new ResponseEntity<>(errorResponse, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }

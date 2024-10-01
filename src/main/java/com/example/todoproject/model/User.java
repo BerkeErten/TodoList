@@ -38,4 +38,11 @@ public class User {
         this.name = name;
         this.surname = surname;
     }
+
+    public void assignTodoItem(TodoItem todoItem){
+        if(!assignedTodos.contains(todoItem)){
+            assignedTodos.add(todoItem);
+        }
+
+    }
 }
